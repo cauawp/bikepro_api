@@ -63,6 +63,7 @@ routes.get(
   authenticate,
   FeedbackController.getUserFeedbacks
 );
+
 routes.get("/products/:product_id/feedbacks", FeedbackController.getFeedbacks);
 routes.delete(
   "/products/:product_id/feedbacks/:user_id/:feedback_id",

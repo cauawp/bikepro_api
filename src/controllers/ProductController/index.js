@@ -67,7 +67,7 @@ const ProductController = {
 
   async getProducts(req, res) {
     try {
-      const products = await find();
+      const products = await Product.find();
       return res.status(200).json(products);
     } catch (err) {
       return res.status(400).json(err);

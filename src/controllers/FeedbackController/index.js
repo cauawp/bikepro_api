@@ -9,7 +9,7 @@ const FeedbackController = {
     try {
       const data = { username: user_id, ...bodyData, product: product_id };
 
-      const createdFeedback = await create(data);
+      const createdFeedback = await Feedback.create(data);
       await createdFeedback.populate("username").execPopulate();
       await createdFeedback.populate("product").execPopulate();
 
@@ -25,7 +25,7 @@ const FeedbackController = {
     const { user_id } = req.params;
 
     try {
-      const userFeedbacks = await find({ username: user_id }).populate(
+      const userFeedbacks = await Feedback.find({ username: user_id }).populate(
         "username"
       );
 
@@ -41,7 +41,7 @@ const FeedbackController = {
     const { feedback_id } = req.params;
 
     try {
-      const feedbacks = await find(feedback_id).populate("username");
+      const feedbacks = await Feedback.find(feedback_id).populate("username");
       return res
         .status(200)
         .json({ feedbacks, msg: "Todas as avaliações do produto!" });
@@ -55,7 +55,7 @@ const FeedbackController = {
     const { feedback_id } = req.params;
 
     try {
-      const deletedFeedback = await findByIdAndDelete(feedback_id);
+      const deletedFeedback = await Feedback.findByIdAndDelete(feedback_id);
       return res
         .status(200)
         .json({ deletedFeedback, msg: "Avaliação removida com sucesso!" });
