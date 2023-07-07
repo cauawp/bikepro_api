@@ -5,7 +5,10 @@ const UserController = {
     const bodyData = req.body;
 
     try {
-      const newUser = await User.create(bodyData);
+      const newUser = await User.create({
+        bodyData,
+        msg: "Usuário criado com sucesso!",
+      });
       return res.status(200).json(newUser);
     } catch (err) {
       return res.status(400).json(err);
@@ -41,7 +44,9 @@ const UserController = {
         new: true,
       });
 
-      return res.status(200).json(updatedUser); //, msg: 'Usuário atualizado!'}
+      return res
+        .status(200)
+        .json({ updatedUser, msg: "Usuário atualizado com sucesso!" });
     } catch (err) {
       return res.status(400).json(err);
     }
@@ -51,7 +56,9 @@ const UserController = {
 
     try {
       const deletedUser = await User.findByIdAndDelete(user_id);
-      return res.status(200).json(deletedUser);
+      return res
+        .status(200)
+        .json({ deletedUser, msg: "Usuário deletado com sucesso!" });
     } catch (err) {
       console.log(err);
       return res.status(400).json(err);

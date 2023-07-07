@@ -5,13 +5,14 @@ const SessionController = require("../controllers/Login");
 const ProductController = require("../controllers/ProductController");
 const CartController = require("../controllers/CartController");
 const FeedbackController = require("../controllers/FeedbackController");
+const FavoriteController = require("../controllers/FavoriteController");
 
 const { authenticate } = require("../middlewares");
 
 const routes = Router();
 
 routes.get("/", (req, res) => {
-  res.send("Olá Mundo");
+  res.send("Hello, World!");
 });
 
 routes.post("/users", UserController.createUser);
@@ -51,20 +52,46 @@ routes.patch(
   CartController.updateCart
 );
 
+//FEEDBACKS
 routes.post(
-  "/feedbacks/:product_id/:user_id",
+  "/products/:product_id/feedbacks/:user_id",
   authenticate,
   FeedbackController.createFeedback
 );
 routes.get(
-  "/feedbacks/:product_id/:user_id",
+  "/products/feedbacks/:user_id",
   authenticate,
   FeedbackController.getUserFeedbacks
 );
-routes.get("/feedbacks/:product_id", FeedbackController.getFeedbacks);
+routes.get("/products/:product_id/feedbacks", FeedbackController.getFeedbacks);
 routes.delete(
-  "/feedbacks/:user_id/:feedback_id",
+  "/products/:product_id/feedbacks/:user_id/:feedback_id",
+  authenticate,
   FeedbackController.deleteFeedback
+);
+
+//FAVORITE
+routes.post(
+  "/products/:product_id/favorites/:user_id",
+  authenticate,
+  FavoriteController.createFavorite
+);
+
+routes.get(
+  "/products/:product_id/favorites",
+  FavoriteController.getFavoritesProduct
+);
+
+routes.patch(
+  "/products/:product_id/favorites/:favorite_id/:user_id",
+  authenticate,
+  FavoriteController.updateFavorite
+);
+
+routes.delete(
+  "/products/:product_id/favorites/:favorite_id/:user_id",
+  authenticate,
+  FavoriteController.deleteProductFavorite
 );
 
 module.exports = routes;
