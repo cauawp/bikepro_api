@@ -20,6 +20,7 @@ const Schema = new mongoose.Schema(
       type: Boolean,
       required: false,
     },
+    lastUpdated: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );

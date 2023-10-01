@@ -38,13 +38,13 @@ const FeedbackController = {
   },
 
   async getFeedbacks(req, res) {
-    const { feedback_id } = req.params;
+    const { feedback_id, product_id } = req.params;
 
     try {
-      const feedbacks = await Feedback.find(feedback_id).populate("username");
-      return res
-        .status(200)
-        .json({ feedbacks, msg: "Todas as avaliações do produto!" });
+      const feedbacks = await Feedback.find({ product: product_id }).populate(
+        "username product"
+      );
+      return res.status(200).json(feedbacks);
     } catch (err) {
       console.log(err);
       return res.status(400).json(err);

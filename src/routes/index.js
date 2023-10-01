@@ -74,8 +74,12 @@ routes.delete(
 //FAVORITE
 routes.post(
   "/products/:product_id/favorites/:user_id",
-  authenticate,
   FavoriteController.createFavorite
+);
+
+routes.get(
+  "/products/:product_id/favorites/:user_id",
+  FavoriteController.getFavoritedProduct
 );
 
 routes.get(
@@ -84,8 +88,7 @@ routes.get(
 );
 
 routes.patch(
-  "/products/:product_id/favorites/:favorite_id/:user_id",
-  authenticate,
+  "/products/:product_id/favorites/:user_id",
   FavoriteController.updateFavorite
 );
 

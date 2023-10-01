@@ -2,16 +2,29 @@ const Favorite = require("../../models/Favorite");
 
 const FavoriteController = {
   async createFavorite(req, res) {
-    const bodyData = req.body;
-    const { product_id } = req.params;
     const { user_id } = req.params;
+    const { product_id } = req.params;
+    const bodyData = req.body;
 
     try {
-      const data = { username: user_id, ...bodyData, product: product_id };
+      const existingFavorite = await Favorite.findOne({
+        username: user_id,
+        product: product_id,
+      });
+
+      if (existingFavorite) {
+        return res
+          .status(400)
+          .json({ msg: "Este produto já foi favoritado por este usuário." });
+      }
+
+      if (!product_id) {
+        return res.status(400).json({ msg: "O ID do produto é obrigatório." });
+      }
+
+      const data = { username: user_id, product: product_id, ...bodyData };
 
       const createdFavorite = await Favorite.create(data);
-      await createdFavorite.populate("username").execPopulate();
-      await createdFavorite.populate("product").execPopulate();
 
       return res
         .status(200)
@@ -22,26 +35,45 @@ const FavoriteController = {
   },
 
   async getFavoritesProduct(req, res) {
-    try {
-      const favoritesProducts = await Favorite.find().populate(
-        "product username"
-      );
+    const { product_id } = req.params;
 
-      return res.status(200).json({
-        ...favoritesProducts,
-        msg: "Aqui está todos favoritos do produto!",
-      });
+    try {
+      const favoritesProducts = await Favorite.find({
+        product: product_id,
+      }).populate("username");
+
+      return res.status(200).json(favoritesProducts);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  },
+
+  async getFavoritedProduct(req, res) {
+    const { product_id, user_id } = req.params;
+
+    try {
+      const favoritedProduct = await Favorite.findOne({
+        product: product_id,
+        username: user_id,
+      }).populate("username");
+
+      return res.status(200).json(favoritedProduct);
     } catch (err) {
       return res.status(400).json(err);
     }
   },
 
   async getUserFavorites(req, res) {
+    const { user_id } = req.params;
+
     try {
-      const userFavorites = await Favorite.find().populate("products username");
+      const userFavorites = await Favorite.find({ username: user_id }).populate(
+        "product"
+      );
+
       return res.status(200).json({
         userFavorites,
-        msg: "Aqui está todos os seus produtos favoritados.",
+        msg: "Aqui estão todos os seus produtos favoritados.",
       });
     } catch (err) {
       return res.status(400).json(err);
@@ -49,22 +81,27 @@ const FavoriteController = {
   },
 
   async updateFavorite(req, res) {
+    const { product_id, user_id } = req.params;
     const bodyData = req.body;
-    const { favorite_id } = req.params;
 
     try {
-      const updatedFavorite = await Favorite.findByIdAndUpdate(
-        favorite_id,
+      const updatedFavorite = await Favorite.findOneAndUpdate(
+        { product: product_id, username: user_id },
         bodyData,
         { new: true }
       );
-      await updatedFavorite.populate("product username").execPopulate();
+
+      if (!updatedFavorite) {
+        return res.status(404).json({ msg: "Favorito não encontrado" });
+      }
 
       return res
         .status(200)
-        .json({ updatedFavorite, msg: "Produto desfavoritado!" });
+        .json({ updatedFavorite, msg: "Favorito atualizado" });
     } catch (err) {
-      return res.status(400).json(err);
+      return res
+        .status(500)
+        .json({ msg: "Erro ao atualizar favorito", error: err.message });
     }
   },
 
@@ -72,8 +109,10 @@ const FavoriteController = {
     const { favorite_id } = req.params;
 
     try {
-      const deletedFavorite = await Favorite.findByIdAndDelete(favorite_id);
-      await deletedFavorite.populate("product username").execPopulate();
+      const deletedFavorite = await Favorite.findByIdAndDelete(
+        favorite_id
+      ).populate("product username");
+
       return res
         .status(200)
         .json({ deletedFavorite, msg: "Favorito removido com sucesso!" });

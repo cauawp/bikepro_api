@@ -5,11 +5,14 @@ const UserController = {
     const bodyData = req.body;
 
     try {
-      const newUser = await User.create({
-        bodyData,
-        msg: "Usuário criado com sucesso!",
-      });
-      return res.status(200).json(newUser);
+      const existingUser = await User.findOne({ username: bodyData.username });
+
+      if (existingUser) {
+        return res.status(400).json({ msg: "Conta com este e-mail já existe" });
+      }
+
+      const newUser = await User.create(bodyData);
+      return res.status(200).json({ newUser, msg: "Conta criada com sucesso" });
     } catch (err) {
       return res.status(400).json(err);
     }
