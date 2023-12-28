@@ -1,4 +1,6 @@
 const User = require("../../models/User");
+const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
 
 const UserController = {
   async createUser(req, res) {

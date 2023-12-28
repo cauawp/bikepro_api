@@ -21,6 +21,8 @@ routes.get("/users/:user_id", UserController.getUserById);
 routes.patch("/users/:user_id", authenticate, UserController.updateUser);
 routes.delete("/users/:user_id", authenticate, UserController.deleteUser);
 
+routes.post("/reset-password", UserController.resetPassword);
+
 routes.post("/sessions", SessionController.createSession);
 
 routes.post(
@@ -44,13 +46,20 @@ routes.get("/products", ProductController.getProducts);
 routes.get("/products/:product_id", ProductController.getProductById);
 
 routes.post("/carts/:user_id", authenticate, CartController.createCart);
-routes.get("/carts/:user_id", authenticate, CartController.getUserCarts);
-routes.get("/carts/:user_id/:cart_id", authenticate, CartController.getCart);
-routes.patch(
-  "/carts/:user_id/:cart_id",
+/*
+routes.patch("/carts/:user_id", authenticate, CartController.updateQuantity);
+routes.patch("/carts/:user_id", authenticate, CartController.updateCart);
+*/
+routes.patch("/carts/:user_id", authenticate, CartController.updateCart);
+
+//routes.patch("/carts/:user_id", authenticate, CartController.deleteProduct);
+routes.delete(
+  "/carts/:user_id/:product_identifier",
   authenticate,
-  CartController.updateCart
+  CartController.deleteProduct
 );
+routes.get("/carts/:user_id", CartController.getUserCarts);
+routes.get("/carts/:user_id/:cart_id", authenticate, CartController.getCart);
 
 //FEEDBACKS
 routes.post(
@@ -89,6 +98,7 @@ routes.get(
 
 routes.patch(
   "/products/:product_id/favorites/:user_id",
+  authenticate,
   FavoriteController.updateFavorite
 );
 

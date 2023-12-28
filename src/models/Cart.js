@@ -1,10 +1,30 @@
 const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
 
 const Schema = new mongoose.Schema({
   products: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+      productSize: {
+        type: String,
+        required: true,
+      },
+      productQuantity: {
+        type: Number,
+        required: false,
+      },
+      productColor: {
+        type: String,
+        required: true,
+      },
+      productIdentifier: {
+        type: String,
+        required: true,
+        default: uuidv4,
+      },
     },
   ],
   username: {
@@ -15,16 +35,24 @@ const Schema = new mongoose.Schema({
   address: {
     street: {
       type: String,
-      required: true,
+      required: false,
     },
     number: {
       type: String,
-      required: true,
+      required: false,
     },
     city: {
       type: String,
-      required: true,
+      required: false,
     },
+  },
+  valueTotal: {
+    type: Number,
+    required: false,
+  },
+  cep: {
+    type: Number,
+    required: false,
   },
   payment: {
     card: {

@@ -27,11 +27,11 @@ const Schema = new mongoose.Schema(
       required: false,
     },
     productLastPrice: {
-      type: String,
+      type: Number,
       required: false,
     },
     productPrice: {
-      type: String,
+      type: Number,
       required: true,
     },
     productImgsDemo: {
