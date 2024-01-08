@@ -21,7 +21,7 @@ routes.get("/users/:user_id", UserController.getUserById);
 routes.patch("/users/:user_id", authenticate, UserController.updateUser);
 routes.delete("/users/:user_id", authenticate, UserController.deleteUser);
 
-routes.post("/reset-password", UserController.resetPassword);
+//routes.post("/reset-password", UserController.resetPassword);
 
 routes.post("/sessions", SessionController.createSession);
 
