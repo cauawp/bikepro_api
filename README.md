@@ -66,8 +66,7 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 <img src="https://media.discordapp.net/attachments/1187424868506030080/1193792907161899048/bikepro-thumb.png?ex=65ae0148&is=659b8c48&hm=0ae21dd8503528d9fd71c76ab99a86a13f7918acf3e0a9aa1a7118c1c06c203f&=&format=webp&quality=lossless&width=741&height=417">
 
-https://github.com/cauawp/bikepro_api/assets/94944114/4186415f-2bde-4056-b5d8-acd8036c0d17
-
+https://github.com/cauawp/bikepro_api/assets/94944114/d254a282-217a-45ce-9152-5797601efc89
 
 ## 🎁 Expressões de gratidão
 
