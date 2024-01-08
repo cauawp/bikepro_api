@@ -1,6 +1,6 @@
 # Bike Pro - Back-end
 
-O Bike Pro é um projeto de back-end desenvolvido para um e-commerce, utilizando as tecnologias Node.js, Express, Nodemon, Dotenv, Mongoose, Cors e UUID.
+O Bike Pro é um projeto de back-end desenvolvido para um e-commerce, utilizando o banco de dados MongoDB e as tecnologias Node.js, Express, Nodemon, Dotenv, Mongoose, Cors e UUID.
 
 ## 🚀 Começando
 
@@ -34,11 +34,11 @@ cd bikepro_front
 ```
 
 ```bash
-npm install
+npm install --no-auditt
 ```
 
 ```bash
-npm start
+npm run dev
 ```
 
 Este comando iniciará a aplicação em modo de desenvolvimento. Abra http://localhost:3000 no seu navegador para visualizar o projeto.
@@ -60,7 +60,7 @@ Repita essas etapas sempre que precisar iniciar o ambiente de desenvolvimento.
 
 ## 📄 Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+Este projeto está sob a licença (GPL-3.0 license - Cauã Wilian) - veja o arquivo [LICENSE.md](https://github.com/cauawp/bikepro_api/blob/ee13498672bc41286ae944d50afce1ca7c4fee84/LICENSE.md) para detalhes.
 
 ## 🎁 Demonstração
 
