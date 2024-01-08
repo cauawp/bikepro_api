@@ -64,8 +64,8 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ## 🎁 Demonstração
 
-<img src="/bikepro_front/bikepro-thumb.png">
-<img src="/bikepro_front/bikepro-demo.gif">
+<img src="https://media.discordapp.net/attachments/1187424868506030080/1193792907161899048/bikepro-thumb.png?ex=65ae0148&is=659b8c48&hm=0ae21dd8503528d9fd71c76ab99a86a13f7918acf3e0a9aa1a7118c1c06c203f&=&format=webp&quality=lossless&width=741&height=417">
+<img src="https://media.discordapp.net/attachments/1187424868506030080/1193792906507604058/bikepro-demo.gif?ex=65ae0148&is=659b8c48&hm=8c71264187d8a0859161b65a38451af6ca175297e96967d4a59df749e4809986&=&width=741&height=417">
 
 ## 🎁 Expressões de gratidão
 
